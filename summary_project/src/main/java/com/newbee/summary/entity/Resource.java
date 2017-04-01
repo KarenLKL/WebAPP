@@ -5,4 +5,5 @@ package com.newbee.summary.entity;
  */
 public class Resource {
     private Long id;
+    private String name;
 }
