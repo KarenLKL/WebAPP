@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- classPathEnttry:数据库的JDBC驱动的jar包地址 -->
+    <classPathEntry location="mysql-connector-java-5.1.41.jar" />
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+            <!-- 是否去除自动生成的注释 true:是 false :否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!-- 数据库链接URL、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/summary?useUnicode=true&amp;characterEncoding=utf-8"
+                        userId="root"
+                        password="root"
+        />
+        <!-- 默认false，把jdbc DECIMAL和NUMERIC类型解析为Interger;true把JDBC,DECIMAL,和NUMERIC类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimal" value="false"></property>
+        </javaTypeResolver>
+        <!-- 生成模型的包名和位置 即model的位置 -->
+        <javaModelGenerator targetPackage="com.newbee.summary.entity"
+                            targetProject="summary/src">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- 生成映射文件的包名和位置 -->
+        <sqlMapGenerator targetPackage="mybatis.mapper"
+                         targetProject="summary/src">
+            <property name="enbleSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!-- 生成DAO的包名和位置 -->
+        <javaClientGenerator targetPackage="com.newbee.summary.mybatis.dao"
+                             type="XMLMAPPER" targetProject="summary/src">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- 要生成的表tableName是數據庫中的表名或視圖名 domainObjectName是實體類名 -->
+        <table tableName="sys_role" domainObjectName="SysRole" >
+            <generatedKey column="role_id" identity="true" sqlStatement="MySql"/>
+        </table>
+
+        <table tableName="sys_resource" domainObjectName="RoleResource" >
+            <generatedKey column="id" identity="true" sqlStatement="MySql"/>
+        </table>
+
+        <table tableName="sys_role_resource" domainObjectName="SysRoleResource" >
+            <generatedKey column="id" identity="true" sqlStatement="MySql"/>
+        </table>
+
+        <table tableName="sys_user" domainObjectName="SysUser" >
+            <generatedKey column="id" identity="true" sqlStatement="MySql"/>
+        </table>
+
+        <table tableName="sys_user_role" domainObjectName="SysUserRole" >
+            <generatedKey column="id" identity="true" sqlStatement="MySql"/>
+        </table>
+    </context>
+</generatorConfiguration>

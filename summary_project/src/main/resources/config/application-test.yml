@@ -1,0 +1,88 @@
+#######################################datasource配置########################################################
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.66.2.33:3306/summary?useUnicode=true&amp;characterEncoding=utf-8
+    username: root
+    password: setpay@123
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 初始化连接大小
+      initial-size: 300
+      # 最小空闲连接数
+      min-idle: 100
+      #最大连接数
+      max-active: 500
+      #查询超时时间
+      query-timeout: 6000
+      #事务查询超时时间
+      transaction-query-timeout: 6000
+      #关闭空闲连接超时时间
+      remove-abandoned-timeout: 1800
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      ##配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      ##配置一个连接在池中最小生存的时间，单位是毫秒
+      min-victable-idle-time-millis: 300000
+      validation-query: select 1
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: true
+      pool-prepared-statements: true
+      max-open-prepared-statements: 300
+      verify-server-certificate: false
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: stat,wall
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 合并多个DruidDataSource的监控数据
+      use-global-dataSource-stat: true
+
+#######################################系统配置########################################################
+server:
+  port: 8081
+  context-path: /summary
+
+#######################################欧飞配置########################################################
+ofPay:
+  ##SP编码
+  uesrId: A1403723
+  ##SP接入密码
+  userPws: fa9c3be1814746358a84eba25fb115a8
+  ##密钥串
+  keyStr: ae4533ae3a454db5a01efeadec880db6
+  ##接入版本
+  version: 6.0
+  url:
+    sinopec:
+      ##加油卡卡号信息查询
+      queryCardInfo: http://apitest.ofpay.com/sinopec/queryCardInfo.do
+      charge: http://apitest.ofpay.com/sinopec/onlineorder.do
+      ##充值状态查询
+      queryOrderStatus: http://apitest.ofpay.com/api/query.do
+
+###########################################报警配置###############################################
+alert:
+  ## 短信
+  sms:
+    cdKey: 9SDK-EMY-0999-RFWLL
+    password: 875384
+    recievers: 15087180905,15687809708,13529427976,18287163917
+  mail:
+  ## 邮件
+    host: mail.gznb.com
+    sender: 15087180905@163.com
+        senderName: 江俊
+        userName: 15087180905@163.com
+        password: jj19900130
+        recievers: jiangjun@gznb.com,likailun@gznb.com,yangjiaqi@gznb.com,yimingxing@gznb.com,linxin@gznb.com
+
+###########################################系统参数配置###############################################
+systemConfig:
+  ## 发生异常次数限制，达到限制之后触发告警逻辑
+  exceptionCount: 5
+
+##############################业务系统接口校验订单合法性##########################################
+operationSys:
+  url: http://10.66.2.31:8091/OilCard/OilCard/QueryOrderInfo
