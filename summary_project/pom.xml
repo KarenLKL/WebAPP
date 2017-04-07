@@ -27,6 +27,8 @@
 		<shiro.version>1.3.2</shiro.version>
 		<fastjson.json>1.2.29</fastjson.json>
 		<rest.assured.version>2.3.3</rest.assured.version>
+		<quartz-scheduler.version>2.2.1</quartz-scheduler.version>
+		<spring.context>4.1.6.RELEASE</spring.context>
 	</properties>
 
 	<dependencies>
@@ -112,6 +114,18 @@
 			<version>3.2</version>
 		</dependency>
 
+		<!--Quartz定时任务-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.context}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>${quartz-scheduler.version}</version>
+		</dependency>
+
 		<!-- Springboot 热部署 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -124,6 +138,12 @@
 			<artifactId>rest-assured</artifactId>
 			<version>${rest.assured.version}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<!--redis配置-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-redis</artifactId>
 		</dependency>
 
 		<dependency>
