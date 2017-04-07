@@ -48,9 +48,10 @@ public class ParamLogAspect {
         StringBuilder paramBuilder = new StringBuilder();
         if (parameterNames != null && parameterNames.length > 0) {
             for (int i = 0; i < parameterNames.length; i++) {
-                paramBuilder.
-                        append("[").
-                        append(parameterNames[i]).append("=").append(JSON.toJSONString(parameterValues[i], SerializerFeature.WriteDateUseDateFormat))
+                paramBuilder
+                        .append("[")
+                        .append(parameterNames[i])
+                        .append("=").append(JSON.toJSONString(parameterValues[i], SerializerFeature.WriteDateUseDateFormat))
                         .append("]");
             }
         }

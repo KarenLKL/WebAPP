@@ -12,7 +12,11 @@ import java.util.Map;
  */
 public enum ExecutEnum {
     EXECUTIVE_OK("1", "操作成功"),
-    EXECUTIVE_FAIL("0", "操作失败");
+    EXECUTIVE_FAIL("0", "操作失败"),
+    PARAMETER_NULL("2", "参数为空"),
+    PARAMETER_LACK("3", "缺少参数"),
+    AUTHENTICATION_ERROR("4", "身份认证失败"),
+    MD5_ERROR("5", "MD5校验失败");
 
     private String flag;
     private String message;

@@ -21,13 +21,13 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private SysUserMapper userMapper;
-    
+
     @Override
     public List<SysUser> query() {
         SysUserExample sysUserExample = new SysUserExample();
         Page<SysUser> page = PageHelper.startPage(1, 10);
         List<SysUser> users = userMapper.selectByExample(sysUserExample);
-        PageInfo<SysUser> result=new PageInfo<>(users);
+        PageInfo<SysUser> result = new PageInfo<>(users);
         return users;
     }
 }
