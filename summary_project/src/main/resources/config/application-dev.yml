@@ -44,48 +44,19 @@ server:
   port: 8081
   context-path: /summary
 
-#######################################欧飞配置########################################################
-ofPay:
-  ##SP编码
-  uesrId: A08566
-  ##SP接入密码
-  userPws: 4c625b7861a92c7971cd2029c2fd3c4a
-  ##密钥串
-  keyStr: 214585C5CA9F4257EF921819547432C4
-  ##接入版本
-  version: 6.0
-  url:
-    sinopec:
-      ##加油卡卡号信息查询
-      queryCardInfo: http://apitest.ofpay.com/sinopec/queryCardInfo.do
-      charge: http://apitest.ofpay.com/sinopec/onlineorder.do
-      ##充值状态查询
-      queryOrderStatus: http://apitest.ofpay.com/api/query.do
-      #queryCardInfo: http://apitest.ofpay.com/sinopec/queryCardInfo.do
-      #charge: http://apitest.ofpay.com/sinopec/onlineorder.do
-
-
-###########################################报警配置###############################################
-alert:
-  ## 短信
-  sms:
-    cdKey: 9SDK-EMY-0999-RFWLL
-    password: 875384
-    recievers: 15087180905,15687809708,13529427976,18287163917,13888046157
-  mail:
-  ## 邮件
-    host: smtp.163.com
-    sender: 15087180905@163.com
-    senderName: 江俊
-    userName: 15087180905@163.com
-    password: jj19900130
-    recievers: jiangjun@gznb.com,likailun@gznb.com,yangjiaqi@gznb.com,yimingxing@gznb.com,linxin@gznb.com
 
 ###########################################系统参数配置###############################################
 systemConfig:
   ## 发生异常次数限制，达到限制之后触发告警逻辑
   exceptionCount: 5
 
-##############################业务系统接口校验订单合法性##########################################
-operationSys:
-  url: http://10.66.2.31:8091/OilCard/OilCard/QueryOrderInfo
+##############################quartz配置##########################################
+org.quartz :
+  #This scheduler’s name will be “MyScheduler”
+  scheduler :
+    instanceName : MyScheduler
+  #There are 3 threads in the thread pool, which means that a maximum of 3 jobs can be run simultaneously.
+  threadPool:
+    threadCount : 3
+  jobStore:
+    class : org.quartz.simpl.RAMJobStore

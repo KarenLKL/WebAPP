@@ -71,7 +71,7 @@ public class DruidDataSourceConfig {
     }
 
     @Bean
-    public PageHelper pageHelper(){
+    public PageHelper pageHelper() {
         PageHelper pageHelper = new PageHelper();
         Properties p = new Properties();
         p.setProperty("offsetAsPageNum", "true");
@@ -80,4 +80,6 @@ public class DruidDataSourceConfig {
         pageHelper.setProperties(p);
         return pageHelper;
     }
+
+
 }
