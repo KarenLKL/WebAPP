@@ -1,7 +1,9 @@
 package com.newbee.summary.config.schedule;
 
+import com.alibaba.fastjson.JSONObject;
 import com.newbee.summary.config.schedule.job.DataSynchronizationJob;
 import com.newbee.summary.config.schedule.job.ProdectLineStatusQueryJob;
+import com.newbee.summary.entity.SysUser;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,8 +47,17 @@ public class QuartzTest {
             job.setCronExpression("0/20 * * * * ?");
             job.setDesc("数据同步任务");
             customJobFactory.addJob(job, DataSynchronizationJob.class);
+            jsonObject2Bean();
         } catch (SchedulerException e) {
             e.printStackTrace();
         }
+    }
+
+    private void jsonObject2Bean(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id",1);
+        jsonObject.put("userName","张三");
+        SysUser sysUser = JSONObject.toJavaObject(jsonObject, SysUser.class);
+        System.out.println(sysUser.toString());
     }
 }
