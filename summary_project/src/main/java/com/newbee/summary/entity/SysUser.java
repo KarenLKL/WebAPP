@@ -112,4 +112,21 @@ public class SysUser {
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
+
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "id=" + id +
+                ", ssoClientId='" + ssoClientId + '\'' +
+                ", loginName='" + loginName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", sex='" + sex + '\'' +
+                ", userType=" + userType +
+                ", status=" + status +
+                ", createBy=" + createBy +
+                ", createDate=" + createDate +
+                ", updateBy=" + updateBy +
+                ", updateDate=" + updateDate +
+                '}';
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
@@ -25,24 +26,25 @@ import java.io.IOException;
 public class SchedulerConfig {
 
     @Bean
-    public JobFactory jobFactory(ApplicationContext applicationContext){
+    public JobFactory jobFactory(ApplicationContext applicationContext) {
         AutowiringSpringBeanJobFactory jobFactory = new AutowiringSpringBeanJobFactory();
         jobFactory.setApplicationContext(applicationContext);
         return jobFactory;
     }
 
     @Bean
-    public SchedulerFactoryBean schedulerFactoryBean(/*DataSource dataSource,*/ JobFactory jobFactory,
-                                                     @Qualifier("sampleJobTrigger") Trigger sampleJobTrigger) throws IOException {
+    public SchedulerFactoryBean schedulerFactoryBean(JobFactory jobFactory
+            , @Qualifier("sampleJobTrigger") Trigger sampleJobTrigger
+            , @Qualifier("threadPoolTaskExecutor") ThreadPoolTaskExecutor threadPoolTaskExecutor) throws
+            IOException {
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
         // this allows to update triggers in DB when updating settings in config file:
         factory.setOverwriteExistingJobs(true);
         //factory.setDataSource(dataSource);
         factory.setJobFactory(jobFactory);
-
         //factory.setQuartzProperties(quartzProperties());
-        factory.setTriggers(sampleJobTrigger);
-
+        //factory.setTriggers(sampleJobTrigger);
+        factory.setTaskExecutor(threadPoolTaskExecutor);
         return factory;
     }
 
@@ -55,6 +57,15 @@ public class SchedulerConfig {
     public SimpleTriggerFactoryBean sampleJobTrigger(@Qualifier("sampleJobDetail") JobDetail jobDetail,
                                                      @Value("${samplejob.frequency}") long frequency) {
         return createTrigger(jobDetail, frequency);
+    }
+
+    @Bean
+    public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
+        ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+        threadPoolTaskExecutor.setCorePoolSize(5);
+        threadPoolTaskExecutor.setMaxPoolSize(10);
+        threadPoolTaskExecutor.setQueueCapacity(25);
+        return threadPoolTaskExecutor;
     }
 
     private static JobDetailFactoryBean createJobDetail(Class jobClass) {

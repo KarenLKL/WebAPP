@@ -5,21 +5,18 @@ import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 定时任务运行工厂类
  */
 @DisallowConcurrentExecution
 public class SampleJob implements Job {
+    private static Logger logger = LoggerFactory.getLogger(SampleJob.class);
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        System.out.println("任务成功运行");
-        ScheduleJob scheduleJob = (ScheduleJob) jobExecutionContext.getMergedJobDataMap().get("scheduleJob");
-        if (scheduleJob != null) {
-            if (scheduleJob.getJobName().equals("data_synchronization"))
-                System.out.println("任务名称 = [" + scheduleJob.getJobName() + "]");
-        }
-
+        logger.debug(">>>>>>>>>>>>>>>>>任务一成功运行");
     }
 }

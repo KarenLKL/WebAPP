@@ -9,4 +9,4 @@ quartz:
   quartz: true
 
 samplejob:
-  frequency: 2000
+  frequency: 10000

@@ -4,6 +4,8 @@ import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 同步远程数据
@@ -11,8 +13,10 @@ import org.quartz.JobExecutionException;
  */
 @DisallowConcurrentExecution
 public class DataSynchronizationJob implements Job {
+    private static Logger logger = LoggerFactory.getLogger(DataSynchronizationJob.class);
+
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        System.out.println("--------------同步远程数据-------------------");
+        logger.debug("--------------同步远程数据-------------------");
     }
 }
