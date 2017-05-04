@@ -19,7 +19,7 @@
     <!-- 配置别名 -->
     <typeAliases>
         <!-- 批量扫描别名 -->
-        <package name="cn.expopay.tradeOf.model" />
+        <package name="com.newbee.summary.entity" />
     </typeAliases>
 
 </configuration>

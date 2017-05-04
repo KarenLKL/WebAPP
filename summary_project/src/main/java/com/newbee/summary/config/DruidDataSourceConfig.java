@@ -50,6 +50,9 @@ public class DruidDataSourceConfig {
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource());
+        sqlSessionFactoryBean
+                .setConfigLocation(new PathMatchingResourcePatternResolver()
+                        .getResource("classpath:config/mybatis/mybatis-config.xml"));
         //mybatis分页
         PageHelper pageHelper = new PageHelper();
         Properties props = new Properties();
@@ -60,8 +63,9 @@ public class DruidDataSourceConfig {
         props.setProperty("params", "count=countSql");
         pageHelper.setProperties(props); //添加插件
         sqlSessionFactoryBean.setPlugins(new Interceptor[]{pageHelper});
-        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mybatis/mapper/*.xml"));
+        /*PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:com/newbee/summary/mybatis/dao*//*" +
+                ".xml"));*/
         return sqlSessionFactoryBean.getObject();
     }
 

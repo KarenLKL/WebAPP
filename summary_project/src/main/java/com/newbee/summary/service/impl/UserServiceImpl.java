@@ -3,9 +3,6 @@ package com.newbee.summary.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.newbee.summary.entity.SysUser;
-import com.newbee.summary.entity.SysUserExample;
-import com.newbee.summary.mybatis.dao.SysUserMapper;
 import com.newbee.summary.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +16,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements IUserService {
 
-    @Autowired
+   /* @Autowired
     private SysUserMapper userMapper;
 
     @Override
@@ -29,5 +26,5 @@ public class UserServiceImpl implements IUserService {
         List<SysUser> users = userMapper.selectByExample(sysUserExample);
         PageInfo<SysUser> result = new PageInfo<>(users);
         return users;
-    }
+    }*/
 }
