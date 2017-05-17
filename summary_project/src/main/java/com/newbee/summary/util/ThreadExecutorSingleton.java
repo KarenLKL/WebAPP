@@ -1,6 +1,7 @@
 package com.newbee.summary.util;
 
 
+import javax.swing.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -22,5 +23,12 @@ public class ThreadExecutorSingleton {
             instance.setMaximumPoolSize(10);
         }
         return instance;
+    }
+    
+    private void eventTest(){
+        JButton jButton = new JButton();
+        jButton.addActionListener(e -> {
+            System.out.println(e.getActionCommand());
+        });
     }
 }

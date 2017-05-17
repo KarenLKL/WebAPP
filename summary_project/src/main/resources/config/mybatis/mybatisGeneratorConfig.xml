@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//config.mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="frontEndServer" targetRuntime="MyBatis3">
+
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--false设置生成的属性名使用驼峰命名法，true则生成属性名和列名一致-->
+        <property name="useActualColumnNames" value="false"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <plugin type="org.config.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="org.config.mybatis.generator.plugins.RowBoundsPlugin"/>
+
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/summary?useUnicode=true&amp;characterEncoding=utf-8"
+                        userId="root"
+                        password="root"
+        />
+
+        <!--java类型处理器-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--java模型创建器-->
+        <javaModelGenerator targetPackage="com.newbee.summary.model"
+                            targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="com.newbee.summary.dao"
+                         targetProject="src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.newbee.summary.dao"
+                             targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="sys_resource">
+            <generatedKey column="id" identity="true" sqlStatement="MySql"/>
+        </table>
+        <table tableName="sys_role">
+            <generatedKey column="role_id" identity="true" sqlStatement="MySql"/>
+        </table>
+        <table tableName="sys_role_resource" domainObjectName="Resources">
+            <generatedKey column="id" identity="true" sqlStatement="MySql"/>
+        </table>
+        <table tableName="sys_user" domainObjectName="Resources">
+            <generatedKey column="id" identity="true" sqlStatement="MySql"/>
+        </table>
+        <table tableName="sys_user_role" domainObjectName="Resources">
+            <generatedKey column="id" identity="true" sqlStatement="MySql"/>
+        </table>
+    </context>
+
+</generatorConfiguration>
